@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Navidad! 🎄</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('fondo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Capa oscura sutil para que el texto y los GIFs resalten sobre el fondo */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
+        }
+
+        /* Pantalla de inicio */
+        #pantalla-inicio {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #b3000c 0%, #4a0000 100%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #pantalla-inicio h1 {
+            font-family: 'Mountains of Christmas', cursive;
+            color: #ffd700;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+        }
+
+        .btn-abrir {
+            background: linear-gradient(45deg, #165b33, #146b3a);
+            color: white;
+            border: 3px solid #ffd700;
+            padding: 18px 36px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: latido 1.5s infinite;
+        }
+
+        .btn-abrir:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        /* Contenedor de la carta */
+        #carta-navidad {
+            position: relative;
+            z-index: 10;
+            max-width: 650px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.92);
+            border: 6px solid #d42426;
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px #ffd700;
+            display: none;
+            animation: aparecer 1s ease forwards;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .decoracion-top {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        #carta-navidad h2 {
+            font-family: 'Mountains of Christmas', cursive;
+            color: #d42426;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .mensaje {
+            font-size: 1.35rem;
+            color: #165b33;
+            font-weight: 600;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .firma {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 2.5rem;
+            color: #d42426;
+            font-weight: bold;
+        }
+
+        /* GIFs repartidos por la pantalla */
+        .gif-flotante {
+            position: fixed;
+            width: 120px;
+            height: auto;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .gif-1 { top: 5%; left: 5%; transform: rotate(-10deg); }
+        .gif-2 { top: 5%; right: 5%; transform: rotate(10deg); }
+        .gif-3 { bottom: 5%; left: 5%; transform: rotate(8deg); }
+        .gif-4 { bottom: 5%; right: 5%; transform: rotate(-8deg); }
+        .gif-5 { top: 45%; left: 2%; }
+        .gif-6 { top: 45%; right: 2%; }
+
+        /* GIFs dentro de la carta */
+        .gifs-carta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gifs-carta img {
+            width: 90px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Nieve cayendo */
+        .copo {
+            position: fixed;
+            top: -10px;
+            color: white;
+            user-select: none;
+            z-index: 50;
+            pointer-events: none;
+            animation: caer linear infinite;
+        }
+
+        @keyframes caer {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gif-flotante { width: 80px; }
+            .gif-5, .gif-6 { display: none; }
+            #carta-navidad h2 { font-size: 2.2rem; }
+            .mensaje { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de Inicio -->
+    <div id="pantalla-inicio">
+        <h1>🎄 Tienes una sorpresa navideña 🎁</h1>
+        <button class="btn-abrir" onclick="abrirCarta()">✨ Abrir mi carta ✨</button>
+    </div>
+
+    <!-- GIFs por toda la pantalla -->
+    <img src="perreo.gif" alt="Navidad" class="gif-flotante gif-1">
+    <img src="perreo.gif" alt="Navidad" class="gif-flotante gif-2">
+    <img src="perreo.gif" alt="Navidad" class="gif-flotante gif-3">
+    <img src="perreo.gif" alt="Navidad" class="gif-flotante gif-4">
+    <img src="perreo.gif" alt="Navidad" class="gif-flotante gif-5">
+    <img src="perreo.gif" alt="Navidad" class="gif-flotante gif-6">
+
+    <!-- Carta de Navidad -->
+    <div id="carta-navidad">
+        <div class="decoracion-top">🎅🎄❄️🎁🦌</div>
+        <h2>¡Felices Fiestas!</h2>
+        <p class="mensaje">
+            Hola querid@ amig@ quiero desearte una feliz e increíble navidad, que comas mucho y que tengas muchos regalos.
+        </p>
+        <div class="firma">¡Feliz Navidad! 🎉</div>
+        
+        <div class="gifs-carta">
+            <img src="perreo.gif" alt="Fiesta navideña">
+            <img src="perreo.gif" alt="Fiesta navideña">
+        </div>
+    </div>
+
+    <script>
+        // Función para quitar la pantalla de inicio y mostrar la carta
+        function abrirCarta() {
+            const inicio = document.getElementById('pantalla-inicio');
+            const carta = document.getElementById('carta-navidad');
+            
+            inicio.style.opacity = '0';
+            setTimeout(() => {
+                inicio.style.display = 'none';
+                carta.style.display = 'block';
+            }, 800);
+        }
+
+        // Generador de nieve cayendo
+        function crearNieve() {
+            const copo = document.createElement('div');
+            copo.classList.add('copo');
+            copo.innerHTML = '❄';
+            copo.style.left = Math.random() * 100 + 'vw';
+            copo.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            copo.style.opacity = Math.random();
+            
+            const duracion = Math.random() * 3 + 3; // Entre 3 y 6 segundos
+            copo.style.animationDuration = duracion + 's';
+            
+            document.body.appendChild(copo);
+
+            setTimeout(() => {
+                copo.remove();
+            }, duracion * 1000);
+        }
+
+        // Crear un copo de nieve cada 150 milisegundos
+        setInterval(crearNieve, 150);
+    </script>
+</body>
+</html>
